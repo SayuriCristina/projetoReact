@@ -1,0 +1,14 @@
+.titulo{
+    color:blue;
+    text-align: center;
+}
+
+.foto{
+    width: 500px;
+    display: block;
+    margin: 0 auto;
+}
+
+p{
+    color:red;
+}
