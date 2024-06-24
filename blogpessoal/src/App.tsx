@@ -5,7 +5,7 @@ function App() {
 
   return (
     <>
-      <Home />
+      <Home titulo='Home' texto='↖ esse é um home.'/>
     </>
   )
 }
