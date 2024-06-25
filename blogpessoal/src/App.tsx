@@ -1,11 +1,29 @@
 import './App.css'
-import Home from './home/Home'
+import Footer from './components/footer/Footer'
+import Navbar from './components/navBar/NavBar'
+import Home from './paginas/home/Home'
+import Login from './paginas/login/login'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
 
   return (
     <>
-      <Home titulo='Home' texto='↖ esse é um home.'/>
+
+      <BrowserRouter>
+        <Navbar />
+
+        <div>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+          </Routes>
+        </div>
+        
+        <Footer />
+
+      </BrowserRouter>
+
     </>
   )
 }
