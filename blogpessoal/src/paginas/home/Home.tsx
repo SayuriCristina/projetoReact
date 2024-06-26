@@ -1,22 +1,29 @@
-import './Home.css'
+import homeLogo from '../../assets/home.png'
 
 function Home() {
-
     return (
-        <div className='flexbox text-center'>
-            <h1 className='text-3xl font-bold underline text-violet-900'>Home</h1>
-            <img className='foto' src='https://c8.alamy.com/comp/DR9PKD/black-guy-showing-thumbs-up-all-on-white-background-DR9PKD.jpg'></img>
-            <p className='text-xl'>esse é um home.</p>
-                <div className="flex flex-col gap-4 items-center py-4">
-                    <h2 className='text-5xl font-bold'>Seja bem vinde!</h2>
-                    <p className='text-xl'>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+        <>
+            <div className="bg-indigo-900 flex justify-center">
+                <div className='container grid grid-cols-2 text-white'>
+                    <div className="flex flex-col gap-4 items-center justify-center py-4">
+                        <h2 className='text-5xl font-bold'>Seja bem vinde!</h2>
+                        <p className='text-xl'>Expresse aqui seus pensamentos e opiniões</p>
 
-                    <div className="flex justify-around gap-4">
-                        <button className='rounded bg-white text-blue-800 py-2 px-4'>Ver postagens</button>
+                        <div className="flex justify-around gap-4">
+
+                            <button className='rounded bg-white text-blue-800 py-2 px-4'>Ver postagens</button>
+                        </div>
+                    </div>
+
+                    <div className="flex justify-center ">
+                        <img src={homeLogo} alt="" className='w-2/3' />
+
                     </div>
                 </div>
             </div>
-    )
+
+        </>
+    );
 }
 
-export default Home
+export default Home;
