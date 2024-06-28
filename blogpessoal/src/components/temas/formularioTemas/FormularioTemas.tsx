@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ChangeEvent, useContext, useEffect, useState } from 'react';
@@ -7,16 +8,20 @@ import Tema from '../../../model/Tema';
 import { atualizar, buscar, cadastrar } from '../../../services/Service';
 
 function FormularioTemas() {
+    // Declara um estado para armazenar os dados do tema
     const [tema, setTema] = useState<Tema>({} as Tema);
 
-    // eslint-disable-next-line prefer-const
     let navigate = useNavigate();
 
+    // Extrai o parâmetro de ID da URL
     const { id } = useParams<{ id: string }>();
 
+    // Obtém o contexto de autenticação
     const { usuario, handleLogout } = useContext(AuthContext);
+    // Extrai o token do usuário autenticado
     const token = usuario.token;
 
+    // Função assíncrona para buscar um tema pelo ID
     async function buscarPorId(id: string) {
         await buscar(`/temas/${id}`, setTema, {
             headers: {
@@ -25,78 +30,83 @@ function FormularioTemas() {
         });
     }
 
+    // useEffect para buscar o tema se um ID estiver presente
     useEffect(() => {
         if (id !== undefined) {
             buscarPorId(id)
         }
-    }, [id])
+    }, [id]);
 
+    // Atualiza o estado do tema conforme o usuário digita no input
     function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
         setTema({
             ...tema,
             [e.target.name]: e.target.value
-        })
+        });
 
-        console.log(JSON.stringify(tema))
+        console.log(JSON.stringify(tema));
     }
 
+    // Função para lidar com o envio do formulário
     async function gerarNovoTema(e: ChangeEvent<HTMLFormElement>) {
-        e.preventDefault()
+        e.preventDefault();
 
         if (id !== undefined) {
+            // Atualiza o tema existente
             try {
                 await atualizar(`/temas`, tema, setTema, {
                     headers: {
                         'Authorization': token
                     }
-                })
+                });
 
-                alert('Tema atualizado com sucesso')
-                retornar()
+                alert('Tema atualizado com sucesso');
+                retornar();
 
             } catch (error: any) {
                 if (error.toString().includes('403')) {
-                    alert('O token expirou, favor logar novamente')
-                    handleLogout()
+                    alert('O token expirou, favor logar novamente');
+                    handleLogout();
                 } else {
-                    alert('Erro ao atualizar o Tema')
+                    alert('Erro ao atualizar o Tema');
                 }
-
             }
-
         } else {
+            // Cadastra um novo tema
             try {
                 await cadastrar(`/temas`, tema, setTema, {
                     headers: {
                         'Authorization': token
                     }
-                })
+                });
 
-                alert('Tema cadastrado com sucesso')
+                alert('Tema cadastrado com sucesso');
 
             } catch (error: any) {
                 if (error.toString().includes('403')) {
-                    alert('O token expirou, favor logar novamente')
-                    handleLogout()
+                    alert('O token expirou, favor logar novamente');
+                    handleLogout();
                 } else {
-                    alert('Erro ao cadastrado o Tema')
+                    alert('Erro ao cadastrar o Tema');
                 }
             }
         }
 
-        retornar()
+        retornar();
     }
 
+    // Função para retornar à página de temas
     function retornar() {
-        navigate("/temas")
+        navigate("/temas");
     }
 
+    // useEffect para verificar se o usuário está logado
     useEffect(() => {
         if (token === '') {
             alert('Você precisa estar logado');
             navigate('/login');
         }
-    }, [token]);
+    }, [token, navigate]);
 
     return (
         <div className="container flex flex-col items-center justify-center mx-auto">
