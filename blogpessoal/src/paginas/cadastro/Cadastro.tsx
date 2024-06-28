@@ -35,6 +35,7 @@ function Cadastro() {
         if (usuarioResposta.id !== 0) {
             back()
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [usuarioResposta])
 
     // Função para navegação de volta para a página de login

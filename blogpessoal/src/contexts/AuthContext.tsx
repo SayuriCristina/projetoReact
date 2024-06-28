@@ -61,7 +61,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         })
     }
     
-    // Retorna o provedor do contexto de autenticação com os valores atualizados
+    // Retorna o provedor do contexto de autenticação com os valores atualizados -- OBRIGATÓRIO
     return (
         <AuthContext.Provider value={{ usuario, handleLogin, handleLogout, isLoading }}>
             {children}
