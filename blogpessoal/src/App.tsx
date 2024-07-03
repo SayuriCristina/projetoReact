@@ -8,8 +8,9 @@ import Cadastro from './paginas/cadastro/Cadastro';
 import Home from './paginas/home/Home';
 import FormularioTemas from './components/temas/formularioTemas/FormularioTemas';
 import DeletarTema from './components/temas/deletarTemas/DeletarTemas';
-
-
+import ListaPostagens from './components/postagens/listaPostagens/ListaPostagens';
+import FormularioPostagem from './components/postagens/formularioPostagem/FormularioPostagem';
+import DeletarPostagem from './components/postagens/deletarPostagem/DeletarPostagem';
 
 function App() {
   return (
@@ -27,6 +28,10 @@ function App() {
               <Route path="/cadastroTema" element={<FormularioTemas />} />
               <Route path="/editarTema/:id" element={<FormularioTemas />} />
               <Route path="/deletarTema/:id" element={<DeletarTema />} />
+              <Route path="/postagens" element={<ListaPostagens />} />
+              <Route path="/cadastroPostagem" element={<FormularioPostagem />} />
+              <Route path="/editarPostagem/:id" element={<FormularioPostagem />} />
+              <Route path="/deletarPostagem/:id" element={<DeletarPostagem />} />
             </Routes>
           </div>
           <Footer />
