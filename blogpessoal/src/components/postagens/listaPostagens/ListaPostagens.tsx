@@ -7,6 +7,7 @@ import Postagem from '../../../model/Postagem';
 import { buscar } from '../../../services/Service';
 import CardPostagem from '../cardPostagem/CardPostagem';
 import { Dna } from 'react-loader-spinner';
+import { toastAlerta } from '../../../util/toastAlerta';
 
 function ListaPostagens() {
 
@@ -23,7 +24,7 @@ function ListaPostagens() {
     // useEffect para verificar se o usuário está logado
     useEffect(() => {
         if (token === '') {
-            alert('Você precisa estar logado');
+            toastAlerta('Você precisa estar logado', 'info');
             navigate('/');
         }
     }, [token, navigate]);
@@ -39,7 +40,7 @@ function ListaPostagens() {
         } catch (error: any) {
             // Se o token estiver expirado, exibe uma mensagem de alerta e desloga o usuário
             if (error.toString().includes('403')) {
-                alert('O token expirou, favor logar novamente');
+                toastAlerta('O token expirou, favor logar novamente', 'info')
                 handleLogout();
             }
         }

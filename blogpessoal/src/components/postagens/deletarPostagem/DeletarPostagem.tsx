@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { AuthContext } from '../../../contexts/AuthContext'
 import Postagem from '../../../model/Postagem'
 import { buscar, deletar } from '../../../services/Service'
+import { toastAlerta } from '../../../util/toastAlerta'
 
 function DeletarPostagem() {
     
@@ -12,6 +13,7 @@ function DeletarPostagem() {
     
     const navigate = useNavigate()
 
+    // Recebe o ID e usa como parâmetro
     const { id } = useParams<{ id: string }>()
 
     // Obtém o contexto de autenticação e extrai o token do usuário autenticado
@@ -29,7 +31,7 @@ function DeletarPostagem() {
         } catch (error: any) {
             // Se o token estiver expirado, exibe uma mensagem de alerta e desloga o usuário
             if (error.toString().includes('403')) {
-                alert('O token expirou, favor logar novamente')
+                toastAlerta('O token expirou, favor logar novamente', 'info')
                 handleLogout()
             }
         }
@@ -38,7 +40,7 @@ function DeletarPostagem() {
     // useEffect para verificar se o usuário está logado
     useEffect(() => {
         if (token === '') {
-            alert('Você precisa estar logado')
+            toastAlerta('Você precisa estar logado', 'info')
             navigate('/login')
         }
     }, [token, navigate])
@@ -64,9 +66,9 @@ function DeletarPostagem() {
                 }
             })
 
-            alert('Postagem apagada com sucesso')
+            toastAlerta('Postagem apagada com sucesso', 'sucesso')
         } catch (error) {
-            alert('Erro ao apagar a Postagem')
+            toastAlerta('Erro ao apagar a Postagem', 'erro')
         }
 
         retornar() 

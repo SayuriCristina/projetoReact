@@ -6,6 +6,7 @@ import { AuthContext } from '../../../contexts/AuthContext';
 import Tema from '../../../model/Tema';
 import { buscar } from '../../../services/Service';
 import CardTemas from '../cardTemas/CardTemas';
+import { toastAlerta } from '../../../util/toastAlerta';
 
 function ListaTemas() {
     // Declara um estado para armazenar os temas, é um array porque é uma coleção de temas
@@ -30,7 +31,7 @@ function ListaTemas() {
         } catch (error: any) {
             // Se o token estiver expirado, exibe uma mensagem de alerta e desloga o usuário
             if (error.toString().includes('403')) {
-                alert('O token expirou, favor logar novamente')
+                toastAlerta('O token expirou, favor logar novamente', 'info')
                 handleLogout()
             }
         }
@@ -39,7 +40,7 @@ function ListaTemas() {
     // useEffect para verificar se o usuário está logado
     useEffect(() => {
         if (token === '') {
-            alert('Você precisa estar logado');
+            toastAlerta('Você precisa estar logado', 'info');
             navigate('/login');
         }
     }, [token, navigate]);
