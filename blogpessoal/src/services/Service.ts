@@ -3,7 +3,7 @@ import axios from "axios";
 
 // Criação de uma instância do Axios com uma URL base
 const api = axios.create({
-    baseURL: 'https://blogpessoal-y8u8.onrender.com'
+    baseURL: import.meta.env.VITE_API_URL
 })
 
 // Função para cadastrar um usuário 
